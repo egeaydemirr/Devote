@@ -40,7 +40,7 @@ struct ContentView: View {
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
-
+            
             do {
                 try viewContext.save()
             } catch {
@@ -48,6 +48,7 @@ struct ContentView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
+    }
         // MARK: - BODY
     var body: some View {
         NavigationView {
@@ -76,7 +77,7 @@ struct ContentView: View {
     }
 
     }
-}
+
 
 
 
