@@ -80,13 +80,13 @@
 		938A7D66290D5F0E00502BA4 /* Devote */ = {
 			isa = PBXGroup;
 			children = (
+				93D4D405290D76240038A2A0 /* Style */,
+				93D4D404290D760B0038A2A0 /* Utiliy */,
+				93D4D403290D75FB0038A2A0 /* Extension */,
 				93D4D402290D67BA0038A2A0 /* Info.plist */,
 				938A7D67290D5F0E00502BA4 /* DevoteApp.swift */,
 				930643AB290D66B2005C0927 /* View */,
 				93D4D400290D67340038A2A0 /* Model */,
-				93D4D3FE290D67190038A2A0 /* Extension */,
-				93D4D3FF290D67210038A2A0 /* Utility */,
-				93D4D401290D676B0038A2A0 /* Style */,
 				930643AA290D6684005C0927 /* Sound */,
 				938A7D6B290D5F0F00502BA4 /* Assets.xcassets */,
 				938A7D6D290D5F0F00502BA4 /* Preview Content */,
@@ -102,20 +102,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		93D4D3FE290D67190038A2A0 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
-		93D4D3FF290D67210038A2A0 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
 		93D4D400290D67340038A2A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,7 +111,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		93D4D401290D676B0038A2A0 /* Style */ = {
+		93D4D403290D75FB0038A2A0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		93D4D404290D760B0038A2A0 /* Utiliy */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utiliy;
+			sourceTree = "<group>";
+		};
+		93D4D405290D76240038A2A0 /* Style */ = {
 			isa = PBXGroup;
 			children = (
 			);
