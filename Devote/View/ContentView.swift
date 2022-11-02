@@ -11,6 +11,9 @@ import CoreData
 struct ContentView: View {
     // MARK: - PROPERTY
     @State var task: String = ""
+    private var isButtonDisabled: Bool {
+        task.isEmpty
+    }
     
     // MARK: - Fetching DATA
     @Environment(\.managedObjectContext) private var viewContext
@@ -70,9 +73,11 @@ struct ContentView: View {
                         Text("SAVE")
                         Spacer()
                     })
+                    .disabled(isButtonDisabled)
                     .padding()
                     .font(.headline)
                     .foregroundColor(.white)
+                    
                     .background(Color.pink)
                     .cornerRadius(10)
                 } //:VSTACK
@@ -96,7 +101,7 @@ struct ContentView: View {
             }//:VSTACK
             .navigationBarTitle("Daily Tasks", displayMode: .large)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
+                    ToolbarItem(placement: .navigationBarLeading) {
                         EditButton()
                     }
                     ToolbarItem {
