@@ -27,6 +27,9 @@ struct ContentView: View {
         withAnimation {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
+            newItem.task = task
+            newItem.completion = false
+            newItem.id = UUID()
 
             do {
                 try viewContext.save()
@@ -77,11 +80,16 @@ struct ContentView: View {
                 .padding()
                 List {
                     ForEach(items) { item in
-                        NavigationLink {
+                        
+                        VStack(alignment: .leading) {
+                            Text(item.task ?? "")
+                                .font(.headline)
+                                .fontWeight(.bold
+                                )
                             Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                        } label: {
-                            Text(item.timestamp!, formatter: itemFormatter)
-                        }
+                                .font(.footnote)
+                                .foregroundColor(.gray)
+                        }//:List Item
                     }
                     .onDelete(perform: deleteItems)
                 }//:LIST
