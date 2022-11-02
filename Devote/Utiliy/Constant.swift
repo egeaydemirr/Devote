@@ -17,4 +17,4 @@ let itemFormatter: DateFormatter = {
 
 // MARK: - UI
 
-// MARK: - UIX 
+// MARK: - UX 
