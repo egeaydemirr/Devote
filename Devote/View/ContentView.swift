@@ -11,6 +11,7 @@ import CoreData
 struct ContentView: View {
     // MARK: - PROPERTY
     @State var task: String = ""
+    
     private var isButtonDisabled: Bool {
         task.isEmpty
     }
@@ -77,8 +78,7 @@ struct ContentView: View {
                     .padding()
                     .font(.headline)
                     .foregroundColor(.white)
-                    
-                    .background(Color.pink)
+                    .background(isButtonDisabled ? Color.gray : Color.pink)
                     .cornerRadius(10)
                 } //:VSTACK
                 
