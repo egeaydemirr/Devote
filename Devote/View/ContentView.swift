@@ -112,7 +112,7 @@ struct ContentView: View {
                     }
                     #endif
                 }//:TOOLBAR
-                .background(backgroundGradient).ignoresSafeArea(.all)
+                .background(backgroundGradient)
             }//:ZSTACK
         }//:NAVIGATION
         .navigationViewStyle(StackNavigationViewStyle())
