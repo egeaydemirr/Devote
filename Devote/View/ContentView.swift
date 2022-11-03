@@ -12,18 +12,20 @@ struct ContentView: View {
     // MARK: - PROPERTY
     @State var task: String = ""
     
+    @FocusState private var keyboardSaklama: Bool
+    
     private var isButtonDisabled: Bool {
         task.isEmpty
     }
     
     // MARK: - Fetching DATA
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
-
+    
     
     // MARK: - FUNCTION
     
@@ -34,7 +36,7 @@ struct ContentView: View {
             newItem.task = task
             newItem.completion = false
             newItem.id = UUID()
-
+            
             do {
                 try viewContext.save()
             } catch {
@@ -43,7 +45,7 @@ struct ContentView: View {
             }
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
@@ -56,66 +58,66 @@ struct ContentView: View {
             }
         }
     }
-        // MARK: - BODY
+    // MARK: - BODY
     var body: some View {
         NavigationView {
-            VStack {
-                VStack(spacing: 16) {
-                    TextField("New Task", text: $task)
+            ZStack {
+                VStack {
+                    VStack(spacing: 16) {
+                        TextField("New Task", text: $task)
+                            .focused($keyboardSaklama)
+                            .padding()
+                            .background(
+                                Color(UIColor.systemGray6)
+                            )
+                            .cornerRadius(10)
+                        Button(action: {
+                            addItem()
+                            keyboardSaklama = false
+                        }, label: {
+                            Spacer()
+                            Text("SAVE")
+                            Spacer()
+                        })
+                        .disabled(isButtonDisabled)
                         .padding()
-                        .background(
-                            Color(UIColor.systemGray6)
-                        )
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .background(isButtonDisabled ? Color.gray : Color.pink)
                         .cornerRadius(10)
-                    Button(action: {
-                        addItem()
-                    }, label: {
-                        Spacer()
-                        Text("SAVE")
-                        Spacer()
-                    })
-                    .disabled(isButtonDisabled)
+                    } //:VSTACK
+                    
                     .padding()
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .background(isButtonDisabled ? Color.gray : Color.pink)
-                    .cornerRadius(10)
-                } //:VSTACK
-                
-                .padding()
-                List {
-                    ForEach(items) { item in
-                        
-                        VStack(alignment: .leading) {
-                            Text(item.task ?? "")
-                                .font(.headline)
-                                .fontWeight(.bold
-                                )
-                            Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                                .font(.footnote)
-                                .foregroundColor(.gray)
-                        }//:List Item
-                    }
-                    .onDelete(perform: deleteItems)
-                }//:LIST
-            }//:VSTACK
-            .navigationBarTitle("Daily Tasks", displayMode: .large)
+                    List {
+                        ForEach(items) { item in
+                            
+                            VStack(alignment: .leading) {
+                                Text(item.task ?? "")
+                                    .font(.headline)
+                                    .fontWeight(.bold
+                                    )
+                                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                                    .font(.footnote)
+                                    .foregroundColor(.gray)
+                            }//:List Item
+                        }
+                        .onDelete(perform: deleteItems)
+                    }//:LIST
+                }//:VSTACK
+                .navigationBarTitle("Daily Tasks", displayMode: .large)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                    #if os(iOS)
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         EditButton()
                     }
-                    ToolbarItem {
-                        Button(action: addItem) {
-                            Label("Add Item", systemImage: "plus")
-                        }
-                    }
-            }//:TOOLBAR
-            
-            Text("Select an item")
-        }
+                    #endif
+                }//:TOOLBAR
+            }//:ZSTACK
+        }//:NAVIGATION
+        .navigationViewStyle(StackNavigationViewStyle())
     }
-
-    }
+    
+}
 
 
 
